@@ -1,0 +1,82 @@
+# API Keys ve Gizli Bilgiler
+.env
+*.key
+*.pem
+secrets.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Loglar
+*.log
+logs/*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Trading Data
+backtest_results/
+historical_data/
+*.csv
+*.xlsx
+
+# Backup
+*_backup/
+backup_*/
+*.bak
+
+# Test
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Temporary
+*.tmp
+temp/
+tmp/
+
+# Docker
+.dockerignore
+Dockerfile
+.docker/
+docker-compose.yml
