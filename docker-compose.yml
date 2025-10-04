@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  whale-bot:
+    build: .
+    container_name: whale-killer-bot
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+      - ./config.py:/app/config.py
+    command: python main_pro.py
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    driver: bridge

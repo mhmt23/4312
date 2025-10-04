@@ -76,7 +76,5 @@ temp/
 tmp/
 
 # Docker
-.dockerignore
-Dockerfile
 .docker/
-docker-compose.yml
+.dockerignore
