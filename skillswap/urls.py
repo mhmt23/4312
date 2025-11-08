@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import RedirectView
+from core import views as core_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('core/', include('core.urls')),
-    path('', RedirectView.as_view(url='/core/login/', permanent=True)),
+    path('', core_views.home_view, name='home'),
 ]
