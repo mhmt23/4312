@@ -15,7 +15,7 @@
     {% endif %}
 
     <a href="{% url 'home' %}">Home</a> |
-    <a href="{% url 'profile' %}">Profile</a> |
+    <a href="{% url 'my_profile' %}">Profile</a> |
     <a href="{% url 'create_service' %}">Create New Service</a>
 
     <hr>
@@ -27,7 +27,7 @@
                 <a href="{% url 'service_detail' service.pk %}">{{ service.title }}</a>
                 - Status: {{ service.get_status_display }}
                 {% if service.assignee %}
-                    (Assigned to: {{ service.assignee.username }})
+                    (Assigned to: <a href="{% url 'profile' service.assignee.username %}">{{ service.assignee.username }}</a>)
                 {% endif %}
 
                 {% if service.status == 'in_progress' %}
@@ -35,6 +35,8 @@
                         {% csrf_token %}
                         <button type="submit">Mark as Completed</button>
                     </form>
+                {% elif service.status == 'completed' and service.id in services_to_review_ids %}
+                    <a href="{% url 'create_review' service.pk %}">Leave a Review</a>
                 {% endif %}
             </li>
         {% empty %}
@@ -50,7 +52,11 @@
             <li>
                 <a href="{% url 'service_detail' service.pk %}">{{ service.title }}</a>
                 - Status: {{ service.get_status_display }}
-                (Creator: {{ service.creator.username }})
+                (Creator: <a href="{% url 'profile' service.creator.username %}">{{ service.creator.username }}</a>)
+
+                {% if service.status == 'completed' and service.id in services_to_review_ids %}
+                    <a href="{% url 'create_review' service.pk %}">Leave a Review</a>
+                {% endif %}
             </li>
         {% empty %}
             <li>You have not accepted any services yet.</li>

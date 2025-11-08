@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Skill, Service
+from .models import Skill, Service, Review
 
 class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -23,3 +23,13 @@ class ServiceCreationForm(forms.ModelForm):
         widgets = {
             'service_type': forms.RadioSelect
         }
+
+class ReviewForm(forms.ModelForm):
+    rating = forms.ChoiceField(
+        choices=[(i, i) for i in range(1, 6)],
+        widget=forms.RadioSelect,
+        label="Rating (1-5)"
+    )
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']

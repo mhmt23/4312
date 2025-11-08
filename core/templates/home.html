@@ -8,7 +8,7 @@
     <p>A place to share skills and services without money.</p>
 
     {% if user.is_authenticated %}
-        <p>Hello, {{ user.username }}! <a href="{% url 'dashboard' %}">Go to your Dashboard</a></p>
+        <p>Hello, <a href="{% url 'my_profile' %}">{{ user.username }}</a>! <a href="{% url 'dashboard' %}">Go to your Dashboard</a></p>
     {% else %}
         <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to participate.</p>
     {% endif %}
@@ -20,7 +20,7 @@
     {% for service in services %}
         <div>
             <h3><a href="{% url 'service_detail' service.pk %}">{{ service.title }}</a> ({{ service.get_service_type_display }})</h3>
-            <p><strong>Creator:</strong> {{ service.creator.username }}</p>
+            <p><strong>Creator:</strong> <a href="{% url 'profile' service.creator.username %}">{{ service.creator.username }}</a></p>
             <p><strong>Skill:</strong> {{ service.skill.name|default:"General" }}</p>
             <p><strong>Time Required:</strong> {{ service.time_required }} credit(s)</p>
             <p>{{ service.description }}</p>
