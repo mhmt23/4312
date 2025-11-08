@@ -19,7 +19,7 @@
 
     {% for service in services %}
         <div>
-            <h3>{{ service.title }} ({{ service.get_service_type_display }})</h3>
+            <h3><a href="{% url 'service_detail' service.pk %}">{{ service.title }}</a> ({{ service.get_service_type_display }})</h3>
             <p><strong>Creator:</strong> {{ service.creator.username }}</p>
             <p><strong>Skill:</strong> {{ service.skill.name|default:"General" }}</p>
             <p><strong>Time Required:</strong> {{ service.time_required }} credit(s)</p>

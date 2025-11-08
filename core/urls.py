@@ -8,4 +8,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('profile/', views.profile_view, name='profile'),
     path('create_service/', views.create_service_view, name='create_service'),
+    path('service/<int:pk>/', views.service_detail_view, name='service_detail'),
+    path('service/<int:pk>/accept/', views.accept_service_view, name='accept_service'),
+    path('service/<int:pk>/complete/', views.complete_service_view, name='complete_service'),
 ]
