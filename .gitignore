@@ -78,3 +78,7 @@ tmp/
 # Docker
 .docker/
 .dockerignore
+
+# Django
+db.sqlite3
+django_server.log
