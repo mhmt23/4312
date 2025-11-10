@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review Service: {{ service.title }}</title>
+</head>
+<body>
+    <h2>Review Service: "{{ service.title }}"</h2>
+    <p>You are reviewing the service provided by/for
+    <strong>
+        {% if request.user == service.creator %}
+            {{ service.assignee.username }}
+        {% else %}
+            {{ service.creator.username }}
+        {% endif %}
+    </strong>.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <hr>
+
+    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+
+</body>
+</html>

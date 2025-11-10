@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile of {{ profile_user.username }}</title>
+</head>
+<body>
+    <h2>Profile of {{ profile_user.username }}</h2>
+
+    <p>
+        <strong>Average Rating:</strong>
+        {% if avg_rating %}
+            {{ avg_rating|floatformat:2 }} / 5.00
+        {% else %}
+            No ratings yet.
+        {% endif %}
+    </p>
+    <p><strong>Time Credits:</strong> {{ profile.time_credit }}</p>
+
+    <h3>Skills:</h3>
+    <ul>
+        {% for skill in profile.skills.all %}
+            <li>{{ skill.name }}</li>
+        {% empty %}
+            <li>This user has not added any skills yet.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    {% if form %} {# Form is only passed if the viewer is the owner #}
+        <h3>Update Your Skills:</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Update Skills</button>
+        </form>
+        <hr>
+    {% endif %}
+
+    <h3>Reviews Received:</h3>
+    {% for review in reviews %}
+        <div>
+            <p>
+                <strong>Rating: {{ review.rating }}/5</strong> by
+                <a href="{% url 'profile' review.reviewer.username %}">{{ review.reviewer.username }}</a>
+                for service "<a href="{% url 'service_detail' review.service.pk %}">{{ review.service.title }}</a>"
+            </p>
+            <blockquote>{{ review.comment }}</blockquote>
+        </div>
+    {% empty %}
+        <p>This user has not received any reviews yet.</p>
+    {% endfor %}
+
+    <hr>
+
+    <a href="{% url 'dashboard' %}">Dashboard</a> |
+    <a href="{% url 'home' %}">Home</a>
+
+    {% if user.is_authenticated and user == profile_user %}
+        <hr>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% endif %}
+
+</body>
+</html>
